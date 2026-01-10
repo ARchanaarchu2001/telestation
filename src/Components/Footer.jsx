@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { FaInstagram, FaFacebookF, FaLinkedin } from "react-icons/fa6";
 
+const BRAND = {
+  primary: "#0B2C73",
+  secondary: "#155AE7",
+  accent: "#007198",
+};
+
 const FOOTER_CONTENT = {
   top: {
     titleLine1: "Let's Work",
@@ -56,7 +62,7 @@ const SocialReactIcon = ({ type }) => {
   if (type === "instagram") return <FaInstagram className={cls} />;
   if (type === "facebook") return <FaFacebookF className={cls} />;
   if (type === "linkedIn") return <FaLinkedin className={cls} />;
-  return <FaXTwitter className={cls} />;
+  return null;
 };
 
 export default function Footer() {
@@ -85,17 +91,18 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-black text-white overflow-hidden">
-      {/* glow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+      {/* premium brand glow */}
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute top-10 left-1/4 w-56 h-56 sm:w-64 sm:h-64 rounded-full blur-3xl animate-pulse"
-          style={{ background: "#D9F70D" }}
+          className="absolute -top-10 left-1/4 w-72 h-72 rounded-full blur-3xl opacity-25 animate-pulse"
+          style={{ background: BRAND.secondary }}
         />
         <div
-          className="absolute bottom-10 right-1/4 w-56 h-56 sm:w-64 sm:h-64 rounded-full blur-3xl animate-pulse"
-          style={{ background: "#D9F70D", animationDelay: "1s" }}
+          className="absolute -bottom-14 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-25 animate-pulse"
+          style={{ background: BRAND.accent, animationDelay: "1s" }}
         />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/5" />
+      </div> */}
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         {/* Top section */}
@@ -104,11 +111,16 @@ export default function Footer() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 leading-tight">
               {c.top.titleLine1}
               <br />
-              <span className="inline-block" style={{ color: "#D9F70D" }}>
+              <span
+                className="inline-block bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: `linear-gradient(90deg, ${BRAND.accent}, ${BRAND.secondary})`,
+                }}
+              >
                 {c.top.titleLine2}
               </span>
             </h2>
-            <p className="text-gray-400 text-sm sm:text-base max-w-md">{c.top.subtitle}</p>
+            <p className="text-white/60 text-sm sm:text-base max-w-md">{c.top.subtitle}</p>
           </div>
 
           <a
@@ -116,14 +128,14 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex w-full md:w-auto items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold overflow-hidden transition-all duration-300 md:hover:scale-105 border-2 rounded-full"
-            style={{ borderColor: "#D9F70D", color: "#D9F70D" }}
+            style={{ borderColor: BRAND.accent, color: BRAND.accent }}
           >
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300">
               {c.top.cta.label}
             </span>
             <div
               className="absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-              style={{ background: "#D9F70D" }}
+              style={{ background: `linear-gradient(90deg, ${BRAND.accent}, ${BRAND.secondary})` }}
             />
           </a>
         </div>
@@ -132,7 +144,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 mb-10 sm:mb-12 text-center sm:text-left">
           {/* Services */}
           <div className="sm:justify-self-start">
-            <h3 className="text-xs font-semibold tracking-wider uppercase text-gray-500 mb-3">
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-white/45 mb-3">
               {services.category}
             </h3>
             <ul className="space-y-2">
@@ -140,7 +152,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors duration-300 relative inline-block"
+                    className="text-sm text-white/60 hover:text-white transition-colors duration-300 relative inline-block"
                     onMouseEnter={() => setHoveredLink(`Services-${idx}`)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
@@ -150,7 +162,7 @@ export default function Footer() {
                         className={`absolute -bottom-1 left-0 w-full h-px transform origin-left transition-transform duration-300 ${
                           hoveredLink === `Services-${idx}` ? "scale-x-100" : "scale-x-0"
                         }`}
-                        style={{ background: "#D9F70D" }}
+                        style={{ background: BRAND.accent }}
                       />
                     </span>
                   </a>
@@ -161,7 +173,7 @@ export default function Footer() {
 
           {/* Company */}
           <div className="sm:justify-self-center">
-            <h3 className="text-xs font-semibold tracking-wider uppercase text-gray-500 mb-3">
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-white/45 mb-3">
               {company.category}
             </h3>
             <ul className="space-y-2">
@@ -169,7 +181,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors duration-300 relative inline-block"
+                    className="text-sm text-white/60 hover:text-white transition-colors duration-300 relative inline-block"
                     onMouseEnter={() => setHoveredLink(`Company-${idx}`)}
                     onMouseLeave={() => setHoveredLink(null)}
                   >
@@ -179,7 +191,7 @@ export default function Footer() {
                         className={`absolute -bottom-1 left-0 w-full h-px transform origin-left transition-transform duration-300 ${
                           hoveredLink === `Company-${idx}` ? "scale-x-100" : "scale-x-0"
                         }`}
-                        style={{ background: "#D9F70D" }}
+                        style={{ background: BRAND.accent }}
                       />
                     </span>
                   </a>
@@ -190,7 +202,7 @@ export default function Footer() {
 
           {/* Social */}
           <div className="sm:justify-self-end">
-            <h3 className="text-xs font-semibold tracking-wider uppercase text-gray-500 mb-3 text-center sm:text-left">
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-white/45 mb-3 text-center sm:text-left">
               {social.category}
             </h3>
 
@@ -202,11 +214,22 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200/70 transition hover:border-[#D9F70D]/30 hover:text-white"
+                  className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:text-white"
+                  style={{
+                    boxShadow: "0 0 0 rgba(0,0,0,0)",
+                  }}
                 >
                   <span className="transition-transform duration-300 group-hover:scale-110">
                     <SocialReactIcon type={item.key} />
                   </span>
+
+                  {/* hover glow */}
+                  <span
+                    className="absolute h-11 w-11 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      boxShadow: `0 0 18px rgba(0,113,152,0.35)`,
+                    }}
+                  />
                 </a>
               ))}
             </div>
@@ -217,7 +240,7 @@ export default function Footer() {
         <div className="mb-6 sm:mb-10 pb-8 sm:pb-10 border-b border-white/10">
           <div className="mx-auto w-full max-w-xl text-center">
             <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{c.newsletter.title}</h3>
-            <p className="text-gray-400 text-sm sm:text-base mb-4">{c.newsletter.subtitle}</p>
+            <p className="text-white/60 text-sm sm:text-base mb-4">{c.newsletter.subtitle}</p>
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <input
@@ -225,13 +248,17 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={c.newsletter.inputPlaceholder}
-                className="w-full flex-1 px-4 py-2.5 bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors duration-300 rounded-md"
+                className="w-full flex-1 px-4 py-2.5 bg-white/5 border border-white/10 text-white text-sm placeholder-white/35 focus:outline-none focus:border-white/25 transition-colors duration-300 rounded-md"
               />
+
               <button
                 type="button"
                 onClick={handleSubscribe}
-                className="w-full sm:w-auto px-6 py-2.5 font-semibold transition-all duration-300 sm:hover:scale-105 hover:shadow-lg text-black rounded-md"
-                style={{ background: "#D9F70D", boxShadow: "0 0 20px rgba(217, 247, 13, 0.3)" }}
+                className="w-full sm:w-auto px-6 py-2.5 font-semibold transition-all duration-300 sm:hover:scale-105 hover:shadow-lg text-white rounded-md"
+                style={{
+                  background: `linear-gradient(90deg, ${BRAND.accent}, ${BRAND.secondary})`,
+                  boxShadow: "0 0 22px rgba(21,90,231,0.22)",
+                }}
               >
                 {c.newsletter.buttonLabel}
               </button>
@@ -240,7 +267,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar (optional) */}
-        {/* <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+        {/* <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
           <p>© {new Date().getFullYear()} DIGTEL. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a className="hover:text-white transition" href="/privacy">

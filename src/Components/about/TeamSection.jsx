@@ -13,6 +13,8 @@ const team = [
   { name: "LUFNA NASRIN T", role: "Senior Developer", image: "/image/developer1.jpeg" },
   { name: "ASHIK ", role: "Developer", image: "/image/developer2.jpeg" },
   { name: "ARCHANA C", role: "Developer", image: "image/developer3.jpeg" },
+  { name: "KAVYA", role: "Quality Assistant", image: "image/quality1.jpeg" },
+   { name: "HARI", role: "Data Analyst", image: "image/data-analyst.JPG" },
  
 ];
 

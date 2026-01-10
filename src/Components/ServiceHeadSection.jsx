@@ -81,130 +81,23 @@ const DEFAULT_SECTIONS = [
   }
 ];
 
-// function StackingCard({ item, index, total, scrollYProgress }) {
-//   const cardRef = useRef(null);
-
-//   const targetScale = 1 - (total - 1 - index) * 0.05;
-//   const scaleRange = [index / total, (index + 1) / total];
-
-//   const scale = useTransform(scrollYProgress, scaleRange, [1, targetScale]);
-
-//   return (
-//     <div
-//       ref={cardRef}
-//       className="sticky top-0 h-screen flex items-center justify-center"
-//       style={{ top: `${index * 20}px` }}
-//     >
-//       <motion.div
-//         style={{
-//           scale,
-//           backgroundColor: item.color,
-//         }}
-//         className="
-//           w-[min(1150px,92vw)]
-//           rounded-[36px]
-//           border border-black/10
-//           shadow-[0_40px_120px_rgba(0,0,0,0.12)]
-//           overflow-hidden
-//           origin-top
-//         "
-//       >
-//         <div className="grid lg:grid-cols-2 gap-10 p-7 sm:p-10 lg:p-12">
-//           {/* LEFT */}
-//           <div className="flex flex-col justify-between">
-//             <div>
-//               <div className="flex items-center gap-4 mb-6">
-//                 <div className="h-14 w-14 rounded-2xl flex items-center justify-center border border-black/10 bg-white/70">
-//                   <span className="text-xl font-bold text-black">
-//                     {item.number}
-//                   </span>
-//                 </div>
-
-//                 <div className="h-px w-16 bg-black/10" />
-//                 <span className="text-sm font-semibold tracking-wider uppercase text-black/40">
-//                   Telestation
-//                 </span>
-//               </div>
-
-//               <h3 className="text-4xl sm:text-5xl font-semibold tracking-tight text-black leading-[1.05]">
-//                 {item.title}
-//               </h3>
-
-//               <p className="mt-5 text-lg sm:text-xl leading-relaxed text-black/70 max-w-[56ch]">
-//                 {item.description}
-//               </p>
-
-//               {!!item.tags?.length && (
-//                 <div className="mt-7 flex flex-wrap gap-2.5">
-//                   {item.tags.map((t) => (
-//                     <span
-//                       key={t}
-//                       className="rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-black/70"
-//                     >
-//                       {t}
-//                     </span>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-
-//             {/* CTA */}
-//             <div className="mt-10 flex flex-wrap items-center gap-3">
-//               <button
-//                 className="px-7 py-3.5 rounded-full text-white font-semibold shadow-sm transition hover:opacity-90"
-//                 style={{ backgroundColor: BRAND.primary }}
-//               >
-//                 Explore
-//               </button>
-
-//               <button className="px-7 py-3.5 rounded-full font-semibold border border-black/10 bg-white/70 text-black hover:bg-white transition">
-//                 Learn more
-//               </button>
-//             </div>
-//           </div>
-
-//           {/* RIGHT */}
-//           <div className="relative">
-//             <div className="relative rounded-3xl overflow-hidden border border-black/10 bg-white shadow-[0_30px_90px_rgba(0,0,0,0.10)]">
-//               <img
-//                 src={item.image}
-//                 alt={item.title}
-//                 className="h-full w-full aspect-[4/3] object-cover"
-//                 loading="lazy"
-//               />
-//               <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
-//             </div>
-
-//             <div
-//               className="absolute -z-10 -top-10 -right-10 h-44 w-44 rounded-full blur-3xl"
-//               style={{ backgroundColor: `${BRAND.accent}22` }}
-//             />
-//           </div>
-//         </div>
-//       </motion.div>
-//     </div>
-//   );
-// }
-
 function StackingCard({ item, index, total, scrollYProgress }) {
-  // How much the cards compress as they stack
-  const targetScale = 1 - (total - 1 - index) * 0.05;
+  const cardRef = useRef(null);
 
-  // Map each card to its own slice of the scroll progress
+  const targetScale = 1 - (total - 1 - index) * 0.05;
   const scaleRange = [index / total, (index + 1) / total];
 
-  // Scale down as the next cards come in
   const scale = useTransform(scrollYProgress, scaleRange, [1, targetScale]);
 
-  // ✅ Stack offset should be on the card (y), NOT on sticky top (prevents jump)
-  const stackOffset = index * 20;
-
   return (
-    <div className="sticky top-0 h-screen flex items-center justify-center">
+    <div
+      ref={cardRef}
+      className="sticky top-0 h-screen flex items-center justify-center"
+      style={{ top: `${index * 20}px` }}
+    >
       <motion.div
         style={{
           scale,
-          y: stackOffset,
           backgroundColor: item.color,
         }}
         className="
@@ -214,7 +107,6 @@ function StackingCard({ item, index, total, scrollYProgress }) {
           shadow-[0_40px_120px_rgba(0,0,0,0.12)]
           overflow-hidden
           origin-top
-          will-change-transform
         "
       >
         <div className="grid lg:grid-cols-2 gap-10 p-7 sm:p-10 lg:p-12">
@@ -293,6 +185,10 @@ function StackingCard({ item, index, total, scrollYProgress }) {
     </div>
   );
 }
+
+
+
+
 
 
 

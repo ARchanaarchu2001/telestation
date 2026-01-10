@@ -8,7 +8,9 @@ import VideoLinkSection from './VideoLinkSection.jsx'
 import OurStorySection from './OurStorySection.jsx'
 import VideoTestimonials from './VideoTestimonials.jsx'
 import TrustedByLeadingBrands from './TrustedLeadingBrands.jsx'
-import TippingPointHero from './TippingPointHero.jsx'
+
+import WhyTelestationPixel from './TelesalesWhySection.jsx'
+import TwoNationShowcase from './TwoNationShowcase.jsx'
 
 
 const Landingpage = () => {
@@ -20,9 +22,12 @@ const Landingpage = () => {
        <ServiceList />
        */}
       {/* <ServiceSection /> */}
-      <OurStorySection />
+    
+      <WhyTelestationPixel/>
+      <TwoNationShowcase/>
+        <OurStorySection />
       {/* <VideoLinkSection /> */}
-      <TrustedByLeadingBrands />
+      {/* <TrustedByLeadingBrands /> */}
       <VideoTestimonials />
       <ContactPage/>
     </>

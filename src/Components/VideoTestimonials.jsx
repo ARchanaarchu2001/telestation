@@ -4,37 +4,38 @@ import { ExternalLink, X } from "lucide-react";
 const reels = [
   {
     id: 1,
-    reelUrl: "https://www.instagram.com/reel/DOqDVCTiaF7/",
-    embedUrl: "https://www.instagram.com/reel/DOqDVCTiaF7/embed/captioned",
+    reelUrl: "https://www.instagram.com/reel/DTQHm_YDChX/",
+    embedUrl: "https://www.instagram.com/reel/DTQHm_YDChX/embed",
     title: "Dubai Marina Luxury Tour",
     views: "125K",
     username: "@wgg_realestate",
   },
   {
     id: 2,
-    reelUrl: "https://www.instagram.com/reel/DLiJXW6yAdy/",
-    embedUrl: "https://www.instagram.com/reel/DLiJXW6yAdy/embed/captioned",
+    reelUrl: "https://www.instagram.com/reel/DR7o3pQkgvO/",
+    embedUrl: "https://www.instagram.com/reel/DR7o3pQkgvO/embed",
     title: "Investment Tips 2025",
     views: "89K",
     username: "@wgg_realestate",
   },
   {
     id: 3,
-    reelUrl: "https://www.instagram.com/reel/DHa40wvpZyz/",
-    embedUrl: "https://www.instagram.com/reel/DHa40wvpZyz/embed/captioned",
+    reelUrl: "https://www.instagram.com/reel/DNYWkhzyKzA/",
+    embedUrl: "https://www.instagram.com/reel/DNYWkhzyKzA/embed",
     title: "Premium Properties",
     views: "156K",
     username: "@wgg_realestate",
   },
   {
     id: 4,
-    reelUrl: "https://www.instagram.com/reel/DGGF845JoEK/",
-    embedUrl: "https://www.instagram.com/reel/DGGF845JoEK/embed/captioned",
+    reelUrl: "https://www.instagram.com/reel/DS7xjLTknaE/",
+    embedUrl: "https://www.instagram.com/reel/DS7xjLTknaE/embed",
     title: "Market Insights",
     views: "94K",
     username: "@wgg_realestate",
   },
 ];
+
 
 export default function VideoTestimonials() {
   const [activeReel, setActiveReel] = useState(null);
@@ -95,9 +96,9 @@ export default function VideoTestimonials() {
 
               {/* SAME INFO OVERLAY */}
               <div className="absolute inset-x-0 bottom-0 p-6 pointer-events-none">
-                <h3 className="text-sm md:text-base font-semibold line-clamp-1">
+                {/* <h3 className="text-sm md:text-base font-semibold line-clamp-1">
                   {reel.title}
-                </h3>
+                </h3> */}
                 <p className="text-xs text-gray-300 mt-1">
                   {reel.views} views
                 </p>

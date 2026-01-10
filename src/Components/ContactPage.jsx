@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import FlatSquaresWalls from "./FlatSquaresWalls";
 import emailjs from "@emailjs/browser";
+import NetworkBackground from "./NetworkBackground";
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
+  const BRAND_COLORS = ["#007198", "#007198", "#155AE7", "#0B2C73"];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,15 +43,15 @@ export default function ContactPage() {
   return (
     <section className="relative min-h-screen w-full bg-[#0b0b0c] text-white">
       {/* Background simulation */}
-      <div className="absolute inset-0 z-0">
-        <div className="hidden md:block absolute inset-0">
+      {/* <div className="absolute inset-0 z-0"> */}
+        {/* <div className="hidden md:block absolute inset-0">
         <FlatSquaresWalls
           count={580}
           binHeightRatio={0.42}
           size={[8, 14]}
           padding={2}
           bg="#0b0b0c"
-          color="#D3F10C"
+          color={BRAND_COLORS}
           stroke={false}
           gravity={0.32}
           airDrag={0.014}
@@ -61,11 +63,18 @@ export default function ContactPage() {
           speedBoost={2.2}
           upwardBias={0.35}
         />
-        </div>
+        </div> */}
         {/* Soft corner vignettes */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(75%_60%_at_0%_0%,rgba(255,255,255,0.05),transparent_60%)]" />
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(75%_60%_at_100%_0%,rgba(255,255,255,0.04),transparent_60%)]" />
-      </div>
+        {/* <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(75%_60%_at_0%_0%,rgba(255,255,255,0.05),transparent_60%)]" />
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(75%_60%_at_100%_0%,rgba(255,255,255,0.04),transparent_60%)]" /> */}
+      {/* </div> */}
+
+       <NetworkBackground
+        imageSrc="/image/your-network.png" // ✅ put your image path here
+        palette={["#007198", "#007198", "#155AE7", "#0B2C73"]}
+        density={0.00014}
+        maxLinkDist={190}
+      />
 
       {/* Content */}
       <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24 z-10">
@@ -73,7 +82,7 @@ export default function ContactPage() {
           {/* Left intro */}
           <div className="md:col-span-2">
             <h1 className="text-4xl md:text-5xl font-semibold leading-tight tracking-wide">
-              Let’s talk about your <span className="text-[#D3F10C]">growth</span>
+              Let’s talk about your <span className="text-[#08DEF6]">growth</span>
             </h1>
             <p className="mt-4 text-zinc-300/90">
               Tell us what you’re building and we’ll get back within one business day.
