@@ -9,6 +9,7 @@ import ServicesHero from "../Components/services/ServiceHero";
 import ServiceHeadSection from "@/Components/ServiceHeadSection";
 import ServicesScroll from "@/Components/ServiceHeadSection";
 import SimpleContactForm from "@/Components/SimpleContact";
+import AnimatedHero from "../Components/services/ServiceHero";
 
 
 const ServicesPage = () => {
@@ -16,7 +17,7 @@ const ServicesPage = () => {
     <main className="bg-black">
       {/* <FourServiceStripExact/> */}
         {/* <DigitalMarketingHero /> */}
-        <ServicesHero/>
+        <AnimatedHero/>
         <ServicesScroll/>
         <SimpleContactForm/>
        

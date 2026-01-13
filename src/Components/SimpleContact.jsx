@@ -110,13 +110,13 @@ export default function SimpleContactForm() {
                 </motion.p>
               ) : null}
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={sending}
                   type="submit"
-                  className="rounded-full px-7 py-3.5 font-semibold text-white shadow-sm disabled:opacity-60"
+                  className="rounded-full px-7 py-3.5 font-semibold text-white shadow-sm disabled:opacity-60 "
                   style={{ backgroundColor: BRAND.primary }}
                 >
                   {sending ? "Sending..." : "Send message"}
@@ -132,7 +132,7 @@ export default function SimpleContactForm() {
                     ✅ Sent successfully!
                   </motion.span>
                 ) : (
-                  <span className="text-sm text-black/50">Reply within 24 hours</span>
+                  <span className="text-sm text-black/50"></span>
                 )}
               </div>
             </form>

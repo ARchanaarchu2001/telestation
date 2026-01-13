@@ -14,13 +14,13 @@ const VIDEO_CONTACT_CONTENT = {
   office: {
     title: "Digtel HEAD OFFICE",
     address:
-      "City Bay Business Center, Office No 523 | Abu Hail, Road Deira – Dubai",
+      "First Floor, UL Cyber Park, Nellikode P O, Calicut,Kerala",
   },
   contact: {
     title: "CONTACT DETAILS",
     phone: "Phn: +971 50 353 5409",
     tel: "Tel: +971 50 353 5409",
-    email: "info@digtel.ae",
+    email: "hr@tspl-corp.com",
   },
   form: {
     fields: {

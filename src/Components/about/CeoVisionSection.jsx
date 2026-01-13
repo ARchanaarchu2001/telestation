@@ -2,9 +2,9 @@ import React from "react";
 
 const teamMembers = [
   {
-    name: "Amit Vyas",
+    name: "Riveen",
     role: "CEO",
-    image: "/image/profile1.jpg", 
+    image: "/image/manager1.jpeg", 
   },
   {
     name: "Andrew Thomas",

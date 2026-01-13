@@ -1,24 +1,51 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 const BRAND = {
   accent: "#37C6D9", // ✅ change this to your brand color
 };
 
 const team = [
+   { name: "ANITA", role: "Team Lead", image: "/image/tl4.jpeg" },
+    { name: "FAJINA", role: "Process Head", image: "/image/data-analyst.JPG" },
+{ name: "KAVYA", role: "Quality Assistant", image: "/image/quality1.jpeg" },
+{ name: "HARI", role: "Senior Data Analyst", image: "/image/data-analyst.JPG" },
+{ name: "ADHIL", role: "Senior Accountant", image: "/image/accountant.JPG" },
+ { name: "AKSHAY", role: "Unit Lead", image: "/image/unit-lead.jpeg" },
   { name: "FUHAD ZENIN", role: "Team Lead", image: "/image/tl1.jpg" },
+
+
+
+
   { name: "ANANDHAN", role: "Team Lead", image: "/image/tl2.png" },
+  { name: "AISHWAR", role: "Creative Lead", image: "/image/creative-lead.JPG" },
   { name: "VIMAL", role: "Team Lead", image: "/image/tl3.png" },
-  { name: "ANITA", role: "Team Lead", image: "/image/tl4.jpeg" },
-   { name: "ZAINAB", role: "Team Lead", image: "/image/tl5.jpeg" },
-  { name: "LUFNA NASRIN T", role: "Senior Developer", image: "/image/developer1.jpeg" },
-  { name: "ASHIK ", role: "Developer", image: "/image/developer2.jpeg" },
-  { name: "ARCHANA C", role: "Developer", image: "image/developer3.jpeg" },
-  { name: "KAVYA", role: "Quality Assistant", image: "image/quality1.jpeg" },
-   { name: "HARI", role: "Data Analyst", image: "image/data-analyst.JPG" },
  
+  { name: "ZAINAB", role: "Team Lead", image: "/image/tl5.jpeg" },
+  
+  
+  
+  
+ 
+ 
+   { name: "LUFNA NASRIN T", role: "Senior Developer", image: "/image/developer1.jpeg" },
+  { name: "ASHIK", role: "Developer", image: "/image/developer2.jpeg" },
+  { name: "ARCHANA C", role: "Developer", image: "/image/developer3.jpeg" },
+
+  // ✅ Add more members here...
+  // { name: "NEW PERSON", role: "Designer", image: "/image/new.jpg" },
 ];
 
 const TeamSection = () => {
+  const initialCount = 5; // ✅ how many cards to show first
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleTeam = useMemo(() => {
+    if (showAll) return team;
+    return team.slice(0, initialCount);
+  }, [showAll]);
+
+  const hasMore = team.length > initialCount;
+
   return (
     <section className="w-full bg-black py-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -30,7 +57,7 @@ const TeamSection = () => {
               style={{
                 color: BRAND.accent,
                 backgroundColor: `${BRAND.accent}1A`, // ~10%
-                borderColor: `${BRAND.accent}33`,     // ~20%
+                borderColor: `${BRAND.accent}33`, // ~20%
               }}
             >
               Our Team
@@ -44,14 +71,11 @@ const TeamSection = () => {
 
         {/* Team Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-
-          {team.map((member, idx) => (
+          {visibleTeam.map((member, idx) => (
             <div
-              key={idx}
+              key={`${member.name}-${idx}`}
               className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-              style={{
-                boxShadow: "0 0 0 rgba(0,0,0,0)",
-              }}
+              style={{ boxShadow: "0 0 0 rgba(0,0,0,0)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = `${BRAND.accent}55`;
                 e.currentTarget.style.boxShadow = `0 25px 60px ${BRAND.accent}22`;
@@ -73,12 +97,7 @@ const TeamSection = () => {
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
 
-                {/* Hover Glow (brand) */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-t to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ from: `${BRAND.accent}33` }}
-                />
-                {/* Tailwind can't read dynamic "from", so do this instead: */}
+                {/* Brand hover glow */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
@@ -102,11 +121,36 @@ const TeamSection = () => {
           ))}
         </div>
 
+        {/* ✅ View More / View Less */}
+        {hasMore && (
+          <div className="text-center mt-12">
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="px-8 py-4 font-bold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              style={{
+                backgroundColor: showAll ? "transparent" : BRAND.accent,
+                color: showAll ? BRAND.accent : "#000",
+                border: showAll ? `1px solid ${BRAND.accent}55` : "1px solid transparent",
+                boxShadow: showAll ? "none" : `0 22px 55px ${BRAND.accent}33`,
+              }}
+              onMouseEnter={(e) => {
+                if (!showAll) e.currentTarget.style.boxShadow = `0 28px 70px ${BRAND.accent}44`;
+              }}
+              onMouseLeave={(e) => {
+                if (!showAll) e.currentTarget.style.boxShadow = `0 22px 55px ${BRAND.accent}33`;
+              }}
+            >
+              {showAll ? "View Less" : "View More"}
+            </button>
+          </div>
+        )}
+
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <a
             href="/contact"
-            className="px-8 py-4 font-bold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            className="px-8 py-4 font-bold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl inline-block"
             style={{
               backgroundColor: BRAND.accent,
               color: "#000",
@@ -121,7 +165,7 @@ const TeamSection = () => {
           >
             Join Our Team
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   );

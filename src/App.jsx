@@ -20,6 +20,7 @@ import SEOPage from "./pages/SEOPage.jsx";
 import SocialMediaPage from "./pages/SocialMediaPage.jsx";
 import WebsitePage from "./pages/WebsitePage.jsx";
 import PerformanceMarketingPage from "./pages/PerformanceMarketingPage.jsx";
+import AwardsPage from "./pages/AwardPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Route path="/clients" element={<ClientPage />} />
       <Route path="/career" element={<CareerPage/>} />
       <Route path="/contact" element={<ContactPage/>} />
+      <Route path="/awards"  element={<AwardsPage/>} />
       <Route path='/services/SocialMedia' element={<SocialMedia />} />
       <Route path='/services/ux-ui-design' element={<UiUx />} />
       <Route path='/services/mobile-development' element={<MobileAppDevelopmentPage />} />

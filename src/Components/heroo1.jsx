@@ -82,7 +82,7 @@ export default function HeroSection() {
         <div className="mt-8 w-full max-w-xs sm:max-w-md">
           <div className="grid grid-cols-2 gap-2 sm:gap-4">
             <a
-              href="https://wa.me/971503535409?text=Hi%20I%20want%20to%20start%20a%20project"
+              href="https://wa.me/919037362703?text=Hi%20I%20want%20to%20start%20a%20project"
               target="_blank"
               rel="noopener noreferrer"
               className="

@@ -16,11 +16,18 @@ const FOOTER_CONTENT = {
     subtitle: "Ready to create something extraordinary?",
     cta: {
       label: "Start Project",
-      whatsappNumber: "971503535409",
+      whatsappNumber: "91 90373 62703",
       message: "I want to know about your service",
     },
   },
 
+   brand: {
+    logoSrc: "/logo.png", 
+    name: "TELESTATION",
+    tagline: "Private Limited",
+    description:
+      'Telestation Services continues to serve as the industry model for matching the needs of thousands of clients to “best-in-class” providers based solely in the Middle-East.',
+  },
   links: [
     {
       category: "Services",
@@ -41,9 +48,9 @@ const FOOTER_CONTENT = {
     {
       category: "Social",
       items: [
-        { label: "Facebook", href: "https://www.facebook.com/", key: "facebook" },
-        { label: "Instagram", href: "https://www.instagram.com/digtel.ae/", key: "instagram" },
-        { label: "Linkedin", href: "https://www.linkedin.com/company/digtel/", key: "linkedIn" },
+       
+        { label: "Instagram", href: "https://www.instagram.com/tsplcorp?igsh=MWs2cXFwaHV0cWVydg==", key: "instagram" },
+        { label: "Linkedin", href: "https://www.linkedin.com/company/tspl-corp/", key: "linkedIn" },
       ],
     },
   ],
@@ -53,7 +60,7 @@ const FOOTER_CONTENT = {
     subtitle: "Get insights and updates directly to your inbox.",
     inputPlaceholder: "Enter your email",
     buttonLabel: "Subscribe",
-    whatsappNumber: "971503535409",
+    whatsappNumber: "919037362703",
   },
 };
 
@@ -106,7 +113,7 @@ export default function Footer() {
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         {/* Top section */}
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-10 sm:mb-12 pb-8 sm:pb-10 border-b border-white/10">
+        {/* <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-10 sm:mb-12 pb-8 sm:pb-10 border-b border-white/10">
           <div className="min-w-0">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 leading-tight">
               {c.top.titleLine1}
@@ -138,38 +145,27 @@ export default function Footer() {
               style={{ background: `linear-gradient(90deg, ${BRAND.accent}, ${BRAND.secondary})` }}
             />
           </a>
-        </div>
+        </div> */}
 
         {/* 3 columns */}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 mb-10 sm:mb-12 text-center sm:text-left">
           {/* Services */}
-          <div className="sm:justify-self-start">
-            <h3 className="text-xs font-semibold tracking-wider uppercase text-white/45 mb-3">
-              {services.category}
-            </h3>
-            <ul className="space-y-2">
-              {services.items.map((item, idx) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="text-sm text-white/60 hover:text-white transition-colors duration-300 relative inline-block"
-                    onMouseEnter={() => setHoveredLink(`Services-${idx}`)}
-                    onMouseLeave={() => setHoveredLink(null)}
-                  >
-                    <span className="relative">
-                      {item.label}
-                      <span
-                        className={`absolute -bottom-1 left-0 w-full h-px transform origin-left transition-transform duration-300 ${
-                          hoveredLink === `Services-${idx}` ? "scale-x-100" : "scale-x-0"
-                        }`}
-                        style={{ background: BRAND.accent }}
-                      />
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Brand Intro (replaces Services) */}
+            <div className="sm:justify-self-start text-center sm:text-left">
+              <div className="flex items-center justify-center sm:justify-start gap-3 mb-4">
+                <img
+                  src={c.brand.logoSrc}
+                  alt={c.brand.name}
+                  className="h-10 w-auto"
+                />
+
+              </div>
+
+              <p className="text-sm text-white/60 leading-relaxed max-w-sm mx-auto sm:mx-0">
+                {c.brand.description}
+              </p>
+            </div>
+
 
           {/* Company */}
           <div className="sm:justify-self-center">
@@ -237,7 +233,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter section */}
-        <div className="mb-6 sm:mb-10 pb-8 sm:pb-10 border-b border-white/10">
+        {/* <div className="mb-6 sm:mb-10 pb-8 sm:pb-10 border-b border-white/10">
           <div className="mx-auto w-full max-w-xl text-center">
             <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{c.newsletter.title}</h3>
             <p className="text-white/60 text-sm sm:text-base mb-4">{c.newsletter.subtitle}</p>
@@ -264,7 +260,7 @@ export default function Footer() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Bottom bar (optional) */}
         {/* <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">

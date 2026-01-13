@@ -8,7 +8,7 @@ export default function Hero({ serviceKey }) {
 
   // ✅ WhatsApp URL (can be overridden per service)
   const defaultWhatsappUrl =
-    "https://wa.me/971503535409?text=" + encodeURIComponent(data.whatsappText);
+    "https://wa.me/919037362703?text=" + encodeURIComponent(data.whatsappText);
 
   const whatsappHref = data.whatsappHref || defaultWhatsappUrl;
   const whatsappLabel = data.whatsappLabel || "Free Consultation";

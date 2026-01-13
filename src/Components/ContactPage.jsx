@@ -93,16 +93,16 @@ export default function ContactPage() {
               {/* Email */}
               <div className="flex items-start gap-3">
                 <span className="mt-[2px]">✉️</span>
-                <a href="mailto:info@digtel.ae" className="hover:text-white transition">
-                  info@digtel.ae
+                <a href="mailto:hr@tspl-corp.com" className="hover:text-white transition">
+                  hr@tspl-corp.com
                 </a>
               </div>
 
               {/* Phone */}
               <div className="flex items-start gap-3">
                 <span className="mt-[2px]">📞</span>
-                <a href="tel:+971503535409" className="hover:text-white transition">
-                  +971 50 353 5409
+                <a href="tel:+919037362703" className="hover:text-white transition">
+                  +91 90373 62703
                 </a>
               </div>
 
@@ -110,9 +110,9 @@ export default function ContactPage() {
               <div className="flex items-start gap-3">
                 <span className="mt-[2px]">📍</span>
                 <div className="leading-relaxed">
-                  <p>City Bay Business Center</p>
-                  <p>Office No 523 | Abu Hail</p>
-                  <p>Road Deira – Dubai</p>
+                  <p> Third Floor,  </p>
+                  <p>UL Cyber Park,</p>
+                  <p>Nellikode P O, Calicut,Kerala</p>
                 </div>
               </div>
             </div>
@@ -178,22 +178,20 @@ export default function ContactPage() {
                     {/* WhatsApp button */}
                     <a
                       href={
-                        "https://wa.me/971501234567?text=" +
+                        "https://wa.me/919037362703?text=" +
                         encodeURIComponent("Hi, I’d like to talk about a new project.")
                       }
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="
-                        inline-flex items-center justify-center gap-2
-                        w-full h-11
-                        rounded-xl
-                        text-sm font-semibold
-                        border border-[#25D366]/50 bg-[#25D366]/10
-                        text-[#25D366]
-                        hover:bg-[#25D366]/20 hover:border-[#25D366]
-                        transition
-                        whitespace-nowrap
-                      "
+                     className="
+  inline-flex items-center justify-center gap-2
+  w-full h-11 rounded-xl text-sm font-semibold
+  border border-white/15 bg-white/5
+  text-[#6EF1F7]
+  hover:bg-white/10 hover:border-white/25
+  transition whitespace-nowrap
+"
+
                     >
                       <span>💬 WhatsApp</span>
                     </a>

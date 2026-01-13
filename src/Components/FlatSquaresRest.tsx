@@ -354,16 +354,16 @@ export function Demo() {
                 {/* Email */}
                 <div className="flex items-start gap-3">
                   <span className="mt-[2px]">✉️</span>
-                  <a href="mailto:info@digtel.ae" className="hover:text-white transition">
-                    info@digtel.ae
+                  <a href="mailto:hr@tspl-corp.com" className="hover:text-white transition">
+                    hr@tspl-corp.com
                   </a>
                 </div>
 
                 {/* Phone */}
                 <div className="flex items-start gap-3">
                   <span className="mt-[2px]">📞</span>
-                  <a href="tel:+971503535409" className="hover:text-white transition">
-                    +971 50 353 5409
+                  <a href="tel:+91 90373 62703" className="hover:text-white transition">
+                    +91 90373 62703
                   </a>
                 </div>
 
@@ -371,9 +371,9 @@ export function Demo() {
                 <div className="flex items-start gap-3">
                   <span className="mt-[2px]">📍</span>
                   <div className="leading-relaxed">
-                    <p>City Bay Business Center</p>
-                    <p>Office No 523 | Abu Hail</p>
-                    <p>Road Deira – Dubai</p>
+                    <p> Third Floor,  </p>
+                  <p>UL Cyber Park,</p>
+                  <p>Nellikode P O, Calicut,Kerala</p>
                   </div>
                 </div>
               </div>

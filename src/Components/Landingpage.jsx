@@ -11,6 +11,9 @@ import TrustedByLeadingBrands from './TrustedLeadingBrands.jsx'
 
 import WhyTelestationPixel from './TelesalesWhySection.jsx'
 import TwoNationShowcase from './TwoNationShowcase.jsx'
+import LogoMarquee from './LogoMarquee.jsx'
+import AwardsPage from '@/pages/AwardPage.jsx'
+import AwardsSection from './AwardSection.jsx'
 
 
 const Landingpage = () => {
@@ -26,6 +29,8 @@ const Landingpage = () => {
       <WhyTelestationPixel/>
       <TwoNationShowcase/>
         <OurStorySection />
+        <LogoMarquee/>
+        <AwardsSection/>
       {/* <VideoLinkSection /> */}
       {/* <TrustedByLeadingBrands /> */}
       <VideoTestimonials />

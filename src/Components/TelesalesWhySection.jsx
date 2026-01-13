@@ -59,7 +59,7 @@ export default function WhyTelestationPixel() {
           className="mx-auto mt-6 max-w-4xl text-center text-white/70"
         >
           Since our Launch in 2020, Telestation has been providing services and
-          results that are well-equipped in quality as well as efficiency...
+          results that are well-equipped in quality as well as efficiency
         </motion.p>
 
         {/* ✅ Cards with movement */}

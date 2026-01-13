@@ -41,11 +41,11 @@ export default function Navbar() {
         <div className="relative flex items-center justify-between px-4 sm:px-6 lg:px-10 h-16">
           {/* Brand */}
           <Link to="/" className="inline-flex items-center gap-3">
-            <div className="relative h-20 w-36">
+            <div className="relative w-[180px] sm:w-[220px] md:w-[260px]">
               <img
                 src="/logo.png"   // use a white/light logo for dark hero
                 alt="Pulse Management"
-                className="h-[50px] w-auto object-contain"
+                className="h-[52px] sm:h-[58px] md:h-[64px] w-full object-contain"
               />
             </div>
           </Link>
@@ -125,17 +125,17 @@ export default function Navbar() {
             </nav>
 
             <div className="mt-6 flex items-center justify-center gap-4">
-              <IconWrap label="Instagram" href="https://www.instagram.com/digtel.ae/">
+              <IconWrap label="Instagram" href="https://www.instagram.com/tsplcorp?igsh=MWs2cXFwaHV0cWVydg==">
                 <InstagramIcon />
               </IconWrap>
               {/* <IconWrap label="WhatsApp" href="#">
                 <WhatsAppIcon />
               </IconWrap> */}
-              <IconWrap label="Email" href="mailto:info@digtel.ae">
+              <IconWrap label="Email" href="mailto:hr@tspl-corp.com">
                 <MailIcon />
               </IconWrap>
-              <IconWrap label="Facebook" href="https://www.facebook.com/">
-               <FacebookIcon/>
+              <IconWrap label="Facebook" href="https://www.linkedin.com/company/tspl-corp/">
+               <LinkedInIcon/>
               </IconWrap>
             </div>
           </motion.aside>
