@@ -97,11 +97,11 @@ export default function CareersIntroSection() {
         alt: "TSPL team operations",
       },
       {
-        src: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=600&fit=crop",
+        src: "/image/service.jpg",
         alt: "Customer engagement desk",
       },
       {
-        src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=600&fit=crop",
+        src: "/image/service1.jpg",
         alt: "Team collaboration",
       },
     ],
@@ -179,38 +179,42 @@ export default function CareersIntroSection() {
 
 
             {/* Buttons */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-row sm:gap-4">
               <a
-                href="#openings"
-                className="
-                  w-full sm:w-auto
-                  inline-flex items-center justify-center gap-3
-                  rounded-full px-7 py-3.5
-                  text-sm sm:text-base font-bold text-black
-                  transition hover:brightness-110 active:scale-[0.98]
-                "
-                style={{
-                  backgroundColor: BRAND.accent,
-                  boxShadow: `0 18px 60px -35px ${BRAND.accent}`,
-                }}
-              >
-                View Open Positions <span className="text-lg">→</span>
-              </a>
+  href="#openings"
+  className="
+    w-full sm:w-auto
+    inline-flex items-center justify-center gap-2
+    whitespace-nowrap
+    rounded-full px-4 sm:px-7 py-3.5
+    text-[12px] sm:text-base font-bold text-black
+    transition hover:brightness-110 active:scale-[0.98]
+  "
+  style={{
+    backgroundColor: BRAND.accent,
+    boxShadow: `0 18px 60px -35px ${BRAND.accent}`,
+  }}
+>
+  <span className="truncate">View  Positions</span>
+  <span className="text-lg">→</span>
+</a>
 
-              <a
-                href="/about"
-                className="
-                  w-full sm:w-auto
-                  inline-flex items-center justify-center
-                  rounded-full px-7 py-3.5
-                  text-sm sm:text-base font-semibold
-                  text-white/90 border border-white/15
-                  bg-white/5 backdrop-blur-sm
-                  transition hover:bg-white/10 hover:border-white/30 active:scale-[0.98]
-                "
-              >
-                Learn About TSPL
-              </a>
+             <a
+  href="/about"
+  className="
+    w-full sm:w-auto
+    inline-flex items-center justify-center
+    whitespace-nowrap
+    rounded-full px-4 sm:px-7 py-3.5
+    text-[12px] sm:text-base font-semibold
+    text-white/90 border border-white/15
+    bg-white/5 backdrop-blur-sm
+    transition hover:bg-white/10 hover:border-white/30 active:scale-[0.98]
+  "
+>
+  <span className="truncate">Learn About TSPL</span>
+</a>
+
             </div>
 
             

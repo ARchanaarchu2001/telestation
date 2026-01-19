@@ -80,7 +80,8 @@ export default function AboutHeadSection() {
     <div
       style={{
         width: "100%",
-        height: "100vh",
+        height: "100svh",
+        minHeight: "100svh",
         position: "relative",
 
         // ✅ BLACK BACKGROUND (main fix)

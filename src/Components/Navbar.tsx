@@ -40,12 +40,18 @@ export default function Navbar() {
       <div className="relative w-full">
         <div className="relative flex items-center justify-between px-4 sm:px-6 lg:px-10 h-16">
           {/* Brand */}
-          <Link to="/" className="inline-flex items-center gap-3">
+          <Link to="/" className="inline-flex items-center ">
             <div className="relative w-[180px] sm:w-[220px] md:w-[260px]">
               <img
                 src="/logo.png"   // use a white/light logo for dark hero
                 alt="Pulse Management"
-                className="h-[52px] sm:h-[58px] md:h-[64px] w-full object-contain"
+                className="
+      w-[clamp(140px,22vw,260px)]
+      h-auto
+      object-contain
+      select-none
+    "
+    draggable={false}
               />
             </div>
           </Link>
@@ -54,13 +60,13 @@ export default function Navbar() {
           <button
             onClick={() => setOpen(v => !v)}
             aria-label="Open menu"
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-1 ring-white/20 hover:bg-white/10 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/80"
+            className="relative inline-flex h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-transparent   hover:bg-white/10 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/80"
           >
             <span className="sr-only">Menu</span>
-            <div className="space-y-1.5">
-              <span className="block h-[2px] w-5 bg-white rounded" />
-              <span className="block h-[2px] w-5 bg-white rounded" />
-              <span className="block h-[2px] w-5 bg-white rounded" />
+            <div className="flex flex-col items-center gap-[5px] sm:gap-[6px] md:gap-[7px]">
+              <span className="block rounded bg-[#6EF1F7] h-[3px] sm:h-[4px] w-6 sm:w-7 md:w-8" />
+              <span className="block rounded bg-[#6EF1F7] h-[3px] sm:h-[4px] w-6 sm:w-7 md:w-8" />
+              <span className="block rounded bg-[#6EF1F7] h-[3px] sm:h-[4px] w-6 sm:w-7 md:w-8" />
             </div>
           </button>
         </div>
@@ -94,7 +100,7 @@ export default function Navbar() {
           >
             <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/20" />
             <div className="flex justify-center">
-              <img src="/logo.png" alt="Pulse" className="h-10 w-auto object-contain" />
+              <img src="/logo.png" alt="Pulse" className="w-[clamp(120px,40vw,180px)] h-auto object-contain"  draggable={false}/>
             </div>
 
             <nav className="mt-4 space-y-3">
@@ -154,16 +160,22 @@ function IconWrap({
   label: string;
   href: string;
 }) {
+  const isExternal =
+    href.startsWith("http") || href.startsWith("https") || href.startsWith("mailto:");
+
   return (
     <a
       aria-label={label}
       href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-sm ring-1 ring-inset ring-white/5 transition hover:bg-white/10"
     >
       {children}
     </a>
   );
 }
+
 
 function InstagramIcon() {
   return (

@@ -158,7 +158,7 @@ const CareersForm = ({ variant = "card" }) => {
         <textarea
           name="coverLetter"
           onChange={handleChange}
-          placeholder="Cover Letter"
+          placeholder="Cover Letter (optional)"
           rows={4}
           className={`${inputBase} ${inputPad} ${focusRing} md:col-span-2 resize-y`}
           onFocus={(e) =>

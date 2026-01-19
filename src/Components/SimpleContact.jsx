@@ -33,7 +33,6 @@ export default function SimpleContactForm() {
 
     try {
       setSending(true);
-      // ✅ Replace this with API/EmailJS later
       await new Promise((r) => setTimeout(r, 900));
       setDone(true);
       setForm({ name: "", email: "", message: "" });
@@ -45,31 +44,43 @@ export default function SimpleContactForm() {
   };
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-black py-16">
       <div className="mx-auto w-[min(720px,92vw)]">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_30px_90px_rgba(0,0,0,0.10)]"
+          className="
+            relative overflow-hidden rounded-3xl
+            border border-white/10
+            bg-white/[0.05] backdrop-blur-2xl
+            shadow-[0_30px_90px_rgba(0,0,0,0.65)]
+          "
         >
-          {/* subtle glow */}
+          {/* glows */}
           <div
-            className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-3xl"
+            className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full blur-3xl opacity-70"
             style={{ backgroundColor: `${BRAND.accent}22` }}
           />
+          <div
+            className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-60"
+            style={{ backgroundColor: `${BRAND.primary}22` }}
+          />
 
-          <div className="p-7 sm:p-10">
-            <p className="text-sm font-semibold tracking-wider uppercase text-black/40">
+          {/* subtle top hairline */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+          <div className="relative p-7 sm:p-10">
+            <p className="text-sm font-semibold tracking-wider uppercase text-white/55">
               Contact
             </p>
 
-            <h2 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight text-black">
+            <h2 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight text-white">
               Let’s talk
             </h2>
 
-            <p className="mt-3 text-black/60">
+            <p className="mt-3 text-white/70">
               Send us a message and we’ll get back to you soon.
             </p>
 
@@ -80,14 +91,32 @@ export default function SimpleContactForm() {
                   value={form.name}
                   onChange={onChange}
                   placeholder="Your name"
-                  className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 outline-none focus:border-black/20"
+                  className="
+                    w-full rounded-2xl
+                    border border-white/10
+                    bg-black/40
+                    px-4 py-3 text-white
+                    placeholder:text-white/35
+                    outline-none
+                    focus:border-white/20 focus:bg-black/55
+                    transition
+                  "
                 />
                 <input
                   name="email"
                   value={form.email}
                   onChange={onChange}
                   placeholder="Email address"
-                  className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 outline-none focus:border-black/20"
+                  className="
+                    w-full rounded-2xl
+                    border border-white/10
+                    bg-black/40
+                    px-4 py-3 text-white
+                    placeholder:text-white/35
+                    outline-none
+                    focus:border-white/20 focus:bg-black/55
+                    transition
+                  "
                 />
               </div>
 
@@ -97,14 +126,23 @@ export default function SimpleContactForm() {
                 onChange={onChange}
                 placeholder="Your message"
                 rows={5}
-                className="w-full resize-none rounded-2xl border border-black/10 bg-white px-4 py-3 outline-none focus:border-black/20"
+                className="
+                  w-full resize-none rounded-2xl
+                  border border-white/10
+                  bg-black/40
+                  px-4 py-3 text-white
+                  placeholder:text-white/35
+                  outline-none
+                  focus:border-white/20 focus:bg-black/55
+                  transition
+                "
               />
 
               {error ? (
                 <motion.p
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-sm text-red-600"
+                  className="text-sm text-red-400"
                 >
                   {error}
                 </motion.p>
@@ -116,8 +154,13 @@ export default function SimpleContactForm() {
                   whileTap={{ scale: 0.98 }}
                   disabled={sending}
                   type="submit"
-                  className="rounded-full px-7 py-3.5 font-semibold text-white shadow-sm disabled:opacity-60 "
-                  style={{ backgroundColor: BRAND.primary }}
+                  className="
+                    rounded-full px-7 py-3.5 font-semibold
+                    text-black
+                    shadow-[0_18px_60px_rgba(55,198,217,0.20)]
+                    disabled:opacity-60
+                  "
+                  style={{ backgroundColor: BRAND.accent }}
                 >
                   {sending ? "Sending..." : "Send message"}
                 </motion.button>
@@ -127,12 +170,12 @@ export default function SimpleContactForm() {
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-sm font-semibold"
-                    style={{ color: BRAND.primary }}
+                    style={{ color: BRAND.accent }}
                   >
                     ✅ Sent successfully!
                   </motion.span>
                 ) : (
-                  <span className="text-sm text-black/50"></span>
+                  <span className="text-sm text-white/40"></span>
                 )}
               </div>
             </form>

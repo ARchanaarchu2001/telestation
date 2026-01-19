@@ -20,7 +20,7 @@ const CareersPerks = () => {
       {/* ✅ responsive grid:
           1 col (very small) → 2 cols (mobile) → 4 cols (desktop)
       */}
-      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         {perks.map((perk, i) => {
           const Icon = perk.icon;
           return (

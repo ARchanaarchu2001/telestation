@@ -1,37 +1,37 @@
 import { useEffect, useState } from "react";
 import { ExternalLink, X } from "lucide-react";
+import LazyIframe from "./LazyIframe";
+import ReelCardLoader from "./ReelCardLoader";
 
 const reels = [
   {
     id: 1,
     reelUrl: "https://www.instagram.com/reel/DTQHm_YDChX/",
     embedUrl: "https://www.instagram.com/reel/DTQHm_YDChX/embed",
-    title: "Dubai Marina Luxury Tour",
-    views: "125K",
+   
+  
     username: "@wgg_realestate",
   },
   {
     id: 2,
     reelUrl: "https://www.instagram.com/reel/DR7o3pQkgvO/",
     embedUrl: "https://www.instagram.com/reel/DR7o3pQkgvO/embed",
-    title: "Investment Tips 2025",
-    views: "89K",
+   
+    
     username: "@wgg_realestate",
   },
   {
     id: 3,
     reelUrl: "https://www.instagram.com/reel/DNYWkhzyKzA/",
     embedUrl: "https://www.instagram.com/reel/DNYWkhzyKzA/embed",
-    title: "Premium Properties",
-    views: "156K",
+    
+   
     username: "@wgg_realestate",
   },
   {
     id: 4,
     reelUrl: "https://www.instagram.com/reel/DS7xjLTknaE/",
     embedUrl: "https://www.instagram.com/reel/DS7xjLTknaE/embed",
-    title: "Market Insights",
-    views: "94K",
     username: "@wgg_realestate",
   },
 ];
@@ -39,6 +39,9 @@ const reels = [
 
 export default function VideoTestimonials() {
   const [activeReel, setActiveReel] = useState(null);
+  const [loadedMap, setLoadedMap] = useState({});
+const markLoaded = (id) => setLoadedMap((p) => ({ ...p, [id]: true }));
+
 
   // Lock scroll when modal open
   useEffect(() => {
@@ -62,7 +65,7 @@ export default function VideoTestimonials() {
         </h2>
 
         {/* GRID (same layout, just a bit tighter on mobile) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {reels.map((reel) => (
             <button
               key={reel.id}
@@ -77,31 +80,49 @@ export default function VideoTestimonials() {
               "
             >
               {/* SAME CARD DESIGN */}
-              <div className="relative aspect-[3/4] w-full overflow-hidden border border-white/80 bg-zinc-900">
-                <iframe
-                  src={reel.embedUrl}
-                  className="w-full h-full pointer-events-none"
-                  style={{
-                    border: "none",
-                    transform: "scale(1.25) translateY(-8%)",
-                    transformOrigin: "center",
-                  }}
-                  frameBorder="0"
-                  scrolling="no"
-                  allow="encrypted-media; clipboard-write"
-                  allowFullScreen
-                  loading="lazy"
-                />
-              </div>
+ <div className="relative aspect-[3/4] w-full overflow-hidden border border-[#6EF1F7] bg-zinc-900">
+  {!loadedMap[reel.id] && <ReelCardLoader logoSrc="/logo1.png" />}
+
+  {/* Mobile */}
+  <div className="block sm:hidden relative w-full h-full">
+    <LazyIframe
+      src={reel.embedUrl}
+      className="relative w-full h-full"
+      style={{
+        border: "none",
+        transform: "scale(1.3) translateY(-12%)",
+        transformOrigin: "center",
+      }}
+      onLoad={() => markLoaded(reel.id)}
+    />
+  </div>
+
+  {/* Desktop */}
+  <div className="hidden sm:block relative w-full h-full">
+    <LazyIframe
+      src={reel.embedUrl}
+      className="relative w-full h-full"
+      style={{
+        border: "none",
+        transform: "scale(1.25) translateY(-8%)",
+        transformOrigin: "center",
+      }}
+      onLoad={() => markLoaded(reel.id)}
+    />
+  </div>
+</div>
+
+
+
 
               {/* SAME INFO OVERLAY */}
               <div className="absolute inset-x-0 bottom-0 p-6 pointer-events-none">
                 {/* <h3 className="text-sm md:text-base font-semibold line-clamp-1">
                   {reel.title}
                 </h3> */}
-                <p className="text-xs text-gray-300 mt-1">
+                {/* <p className="text-xs text-gray-300 mt-1">
                   {reel.views} views
-                </p>
+                </p> */}
               </div>
             </button>
           ))}
@@ -145,7 +166,7 @@ export default function VideoTestimonials() {
               </div>
 
               <div className="absolute inset-x-0 bottom-0 z-20 p-4 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
-                <h3 className="text-base font-semibold">{activeReel.title}</h3>
+                {/* <h3 className="text-base font-semibold">{activeReel.title}</h3> */}
 
                 <a
                   href={activeReel.reelUrl}

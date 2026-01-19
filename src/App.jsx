@@ -21,8 +21,20 @@ import SocialMediaPage from "./pages/SocialMediaPage.jsx";
 import WebsitePage from "./pages/WebsitePage.jsx";
 import PerformanceMarketingPage from "./pages/PerformanceMarketingPage.jsx";
 import AwardsPage from "./pages/AwardPage";
+import Contact from "./pages/Contact";
+import LogoLoader from "./Components/LogoLoader";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [loading , setLoading] = useState(true);
+  
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 1200); // demo
+    return () => clearTimeout(t);
+  }, []);
+
+  if (loading) return <LogoLoader text="Loading TSPL..." />;
   return (
 <div>
   <Navbar />
@@ -34,6 +46,7 @@ function App() {
       <Route path="/clients" element={<ClientPage />} />
       <Route path="/career" element={<CareerPage/>} />
       <Route path="/contact" element={<ContactPage/>} />
+     
       <Route path="/awards"  element={<AwardsPage/>} />
       <Route path='/services/SocialMedia' element={<SocialMedia />} />
       <Route path='/services/ux-ui-design' element={<UiUx />} />

@@ -4,6 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 const LifeAtDigtelSection = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [selected, setSelected] = useState(null);
+  const BRAND = { accent: "#37C6D9" };
+const [imgAR, setImgAR] = useState(3 / 4); // default fallback
+
 
   const teamMembers = [
     {
@@ -81,7 +84,7 @@ const LifeAtDigtelSection = () => {
     {
       name: "HARI",
       role: "Data Analyst",
-      image: "/image/program10.jpeg",
+      image: "/image/program11.jpeg",
       color: "bg-blue-600",
       quote: "The projects are challenging, but the environment is supportive. That balance is rare.",
       author: "Hari • Data Analyst",
@@ -239,6 +242,7 @@ const LifeAtDigtelSection = () => {
             <div className="flex flex-col gap-4">
               <ImageCard member={teamMembers[2]} index={2} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setSelected={setSelected} height="380px" delay={0.25} />
               <ImageCard member={teamMembers[8]} index={8} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setSelected={setSelected} height="240px" delay={0.3} />
+              <ImageCard member={teamMembers[9]} index={9} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setSelected={setSelected} height="160px" delay={0.35} />
             </div>
           </div>
 
@@ -252,103 +256,255 @@ const LifeAtDigtelSection = () => {
         </div>
       </div>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
-            onClick={closeModal}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              className="relative w-full max-w-lg rounded-3xl border border-white/20 bg-zinc-950 p-6 sm:p-8 shadow-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            >
-              {/* Gradient background accent */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-600/20 to-blue-600/20 rounded-full blur-3xl -z-10" />
-              
-              <div className="flex items-start justify-between gap-4 mb-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="min-w-0"
-                >
-                  <p className="text-sm text-white/50 font-medium">Life at TSPL</p>
-                  <h3 className="mt-1 text-2xl sm:text-3xl font-bold text-white">
-                    {selected.name}
-                  </h3>
-                  <p className="text-sm text-white/60 mt-1">{selected.role}</p>
-                </motion.div>
+      
+     
+{/* Modal */}
+{/* Modal */}
+<AnimatePresence>
+  {selected && (
+    <motion.div
+      className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 md:p-8"
+      onClick={closeModal}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+    >
+      {/* -------------------------
+          ✅ MOBILE MODAL (keep yours)
+          ------------------------- */}
+      <motion.div
+        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, y: 30, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 30, scale: 0.96 }}
+        transition={{ type: "spring", stiffness: 260, damping: 26 }}
+        className="
+          md:hidden
+          relative w-full
+          max-w-[92vw]
+          h-[90svh]
+          rounded-3xl bg-zinc-950 shadow-2xl overflow-hidden
+        "
+        style={{
+          border: `1px solid ${BRAND.accent}22`,
+          boxShadow: `0 30px 90px rgba(0,0,0,0.65)`,
+        }}
+      >
+        {/* glow */}
+        <div
+          className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl"
+          style={{
+            background: `radial-gradient(circle, ${BRAND.accent}40, transparent 65%)`,
+          }}
+        />
+        <div
+          className="pointer-events-none absolute -bottom-28 -left-24 h-80 w-80 rounded-full blur-3xl"
+          style={{
+            background: `radial-gradient(circle, ${BRAND.accent}2a, transparent 65%)`,
+          }}
+        />
 
-                <motion.button
-                  onClick={closeModal}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ delay: 0.15 }}
-                  className="shrink-0 rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-white hover:bg-white/10 transition-colors duration-200"
-                >
-                  ✕
-                </motion.button>
+        {/* Close */}
+        <motion.button
+          onClick={closeModal}
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.06, rotate: 90 }}
+          whileTap={{ scale: 0.94 }}
+          className="absolute right-3 top-3 z-20 rounded-xl px-3 py-2 text-white"
+          style={{
+            border: `1px solid ${BRAND.accent}33`,
+            background: `linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))`,
+          }}
+        >
+          ✕
+        </motion.button>
+
+        {/* ✅ No-scroll layout */}
+        <div className="h-full p-4 sm:p-6">
+          <div className="h-full grid gap-4">
+            {/* Image */}
+            <div
+              className="relative w-full overflow-hidden rounded-2xl bg-black"
+              style={{ border: `1px solid ${BRAND.accent}22` }}
+            >
+              <img
+                src={selected.image}
+                alt={selected.name}
+                draggable={false}
+                className="w-full h-full object-cover object-center"
+                style={{
+                  maxHeight: "clamp(240px, 48vh, 520px)",
+                }}
+              />
+            </div>
+
+            {/* Text */}
+            <div className="min-w-0 flex flex-col justify-center">
+              <p
+                className="text-xs font-medium"
+                style={{ color: `${BRAND.accent}cc` }}
+              >
+                Life at TSPL
+              </p>
+
+              <h3 className="mt-2 text-2xl font-extrabold text-white leading-tight">
+                {selected.name}
+              </h3>
+
+              <p className="mt-1 text-sm text-white/70">{selected.role}</p>
+
+              <div
+                className="mt-4 rounded-2xl p-4"
+                style={{
+                  border: `1px solid ${BRAND.accent}22`,
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))",
+                }}
+              >
+                <p className="text-white/90 leading-relaxed text-sm">
+                  “{selected.quote}”
+                </p>
+
+                <div className="mt-3 flex items-center gap-2">
+                  <span
+                    className="inline-block h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: BRAND.accent }}
+                  />
+                  <p className="text-sm text-white/55 font-medium">
+                    — {selected.author}
+                  </p>
+                </div>
               </div>
 
-              <motion.div
-                className="flex gap-5"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
-              >
-                <motion.div
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <img
-                    src={selected.image}
-                    alt={selected.name}
-                    className="h-24 w-24 rounded-2xl object-cover border-2 border-white/20 shadow-lg"
-                  />
-                </motion.div>
-                
-                <div className="min-w-0 flex-1">
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-white/90 leading-relaxed text-sm sm:text-base"
-                  >
-                    "{selected.quote}"
-                  </motion.p>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="mt-4 text-sm text-white/50 font-medium"
-                  >
-                    — {selected.author}
-                  </motion.p>
-                </div>
-              </motion.div>
-
-              {/* Decorative line */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-                className="mt-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left"
+              <div
+                className="mt-4 h-px w-full"
+                style={{
+                  background: `linear-gradient(90deg, transparent, ${BRAND.accent}55, transparent)`,
+                }}
               />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* -------------------------
+          ✅ DESKTOP MODAL (previous style)
+          ------------------------- */}
+      <motion.div
+        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, y: 30, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 30, scale: 0.96 }}
+        transition={{ type: "spring", stiffness: 260, damping: 26 }}
+        className="
+          hidden md:block
+          relative w-full max-w-5xl
+          rounded-3xl bg-zinc-950 shadow-2xl overflow-hidden
+        "
+        style={{
+          border: `1px solid ${BRAND.accent}22`,
+          boxShadow: `0 30px 90px rgba(0,0,0,0.65)`,
+        }}
+      >
+        {/* ✅ Brand glow */}
+        <div
+          className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl"
+          style={{
+            background: `radial-gradient(circle, ${BRAND.accent}40, transparent 65%)`,
+          }}
+        />
+        <div
+          className="pointer-events-none absolute -bottom-28 -left-24 h-80 w-80 rounded-full blur-3xl"
+          style={{
+            background: `radial-gradient(circle, ${BRAND.accent}2a, transparent 65%)`,
+          }}
+        />
+
+        {/* Close button */}
+        <motion.button
+          onClick={closeModal}
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.06, rotate: 90 }}
+          whileTap={{ scale: 0.94 }}
+          className="absolute right-4 top-4 z-20 rounded-xl px-3 py-2 text-white"
+          style={{
+            border: `1px solid ${BRAND.accent}33`,
+            background: `linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))`,
+          }}
+        >
+          ✕
+        </motion.button>
+
+        {/* ✅ Desktop layout (previous) */}
+        <div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[520px_1fr]">
+          {/* Image (big + contained like your old modal) */}
+          <div
+            className="relative w-full overflow-hidden rounded-2xl bg-black"
+            style={{
+              border: `1px solid ${BRAND.accent}22`,
+              minHeight: "520px",
+            }}
+          >
+            <img
+              src={selected.image}
+              alt={selected.name}
+              className="absolute inset-0 w-full h-full object-contain object-center"
+              draggable={false}
+            />
+          </div>
+
+          {/* Right side text */}
+          <div className="min-w-0 flex flex-col justify-center">
+            <p className="text-sm font-medium" style={{ color: `${BRAND.accent}cc` }}>
+              Life at TSPL
+            </p>
+
+            <h3 className="mt-2 text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+              {selected.name}
+            </h3>
+
+            <p className="mt-2 text-base sm:text-lg text-white/70">{selected.role}</p>
+
+            <div
+              className="mt-6 rounded-2xl p-5 sm:p-6"
+              style={{
+                border: `1px solid ${BRAND.accent}22`,
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))",
+              }}
+            >
+              <p className="text-white/90 leading-relaxed text-sm sm:text-base">
+                “{selected.quote}”
+              </p>
+
+              <div className="mt-4 flex items-center gap-2">
+                <span
+                  className="inline-block h-1.5 w-1.5 rounded-full"
+                  style={{ backgroundColor: BRAND.accent }}
+                />
+                <p className="text-sm text-white/55 font-medium">— {selected.author}</p>
+              </div>
+            </div>
+
+            <div
+              className="mt-6 h-px w-full"
+              style={{
+                background: `linear-gradient(90deg, transparent, ${BRAND.accent}55, transparent)`,
+              }}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
+
+
     </section>
   );
 };

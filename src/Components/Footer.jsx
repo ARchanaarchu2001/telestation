@@ -204,30 +204,26 @@ export default function Footer() {
 
             <div className="flex items-center justify-center sm:justify-start gap-3">
               {social.items.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={item.label}
-                  className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:text-white"
-                  style={{
-                    boxShadow: "0 0 0 rgba(0,0,0,0)",
-                  }}
-                >
-                  <span className="transition-transform duration-300 group-hover:scale-110">
-                    <SocialReactIcon type={item.key} />
-                  </span>
+  <a
+    key={item.label}
+    href={item.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={item.label}
+    className="group relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:text-white"
+  >
+    <span className="transition-transform duration-300 group-hover:scale-110">
+      <SocialReactIcon type={item.key} />
+    </span>
 
-                  {/* hover glow */}
-                  <span
-                    className="absolute h-11 w-11 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{
-                      boxShadow: `0 0 18px rgba(0,113,152,0.35)`,
-                    }}
-                  />
-                </a>
-              ))}
+    {/* hover glow */}
+    <span
+      className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      style={{ boxShadow: `0 0 18px rgba(0,113,152,0.35)` }}
+    />
+  </a>
+))}
+
             </div>
           </div>
         </div>

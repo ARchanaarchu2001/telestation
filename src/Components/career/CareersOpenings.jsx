@@ -7,6 +7,12 @@ import CareersForm from "./CareerFrom";
 
 const COMPANY_LOCATION = "Calicut, Kerala";
 
+// ✅ BRAND COLORS
+const BRAND = {
+  cyan: "#6EF1F7",
+  blue: "#007399",
+};
+
 const JOBS = [
   {
     id: 1,
@@ -16,6 +22,12 @@ const JOBS = [
   },
   {
     id: 2,
+    title: "Business Development Executive (B2C)",
+    type: "Onsite",
+    location: COMPANY_LOCATION,
+  },
+  {
+    id: 3,
     title: "Business Development Executive (B2C)",
     type: "Onsite",
     location: COMPANY_LOCATION,
@@ -30,53 +42,81 @@ function JobCard({ job, onApply }) {
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.5 }}
       className="
-        group rounded-2xl border border-black/10 bg-white
-        p-5 sm:p-6 md:p-7 lg:p-8
-        shadow-[0_25px_80px_-60px_rgba(0,0,0,0.35)]
+        group relative overflow-hidden rounded-2xl
+        border border-white/10
+        bg-gradient-to-br from-white/[0.06] to-white/[0.02]
+        p-6 sm:p-7 md:p-8
+        shadow-[0_25px_90px_-60px_rgba(0,0,0,0.65)]
+        backdrop-blur-sm
+        text-center
       "
     >
-      {/* ✅ stack on mobile, row on sm+ */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-6">
-        <div className="min-w-0">
-          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight text-black leading-tight">
-            {job.title}
-          </h3>
-          <p className="mt-2 text-xs sm:text-sm md:text-base text-black/55">
-            {job.location}
-          </p>
-        </div>
+      {/* ✅ brand glows */}
+      <div
+        className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-35"
+        style={{
+          background: `radial-gradient(circle, ${BRAND.cyan}40, transparent 60%)`,
+        }}
+      />
+      <div
+        className="pointer-events-none absolute -bottom-28 -right-28 h-80 w-80 rounded-full blur-3xl opacity-25"
+        style={{
+          background: `radial-gradient(circle, ${BRAND.blue}35, transparent 65%)`,
+        }}
+      />
 
-        <span className="shrink-0 text-xs sm:text-sm font-semibold text-black/80 rounded-full border border-black/10 px-3 py-1 self-start">
+      {/* ✅ centered content */}
+      <div className="relative z-10 flex flex-col items-center">
+        {/* type pill */}
+        <span
+          className="mb-4 rounded-full border px-3 py-1 text-xs sm:text-sm font-semibold backdrop-blur"
+          style={{
+            borderColor: `${BRAND.cyan}55`,
+            color: BRAND.cyan,
+            backgroundColor: "rgba(0,0,0,0.35)",
+          }}
+        >
           {job.type}
         </span>
-      </div>
 
-      {/* ✅ full width button on mobile */}
-      <button
-        onClick={onApply}
-        className="
-          mt-6 sm:mt-8 md:mt-10
-          w-full sm:w-auto
-          inline-flex items-center justify-center gap-3
-          rounded-xl
-          border border-black/20
-          px-6 sm:px-8 md:px-10
-          py-3 sm:py-3.5 md:py-4
-          text-sm sm:text-base font-semibold text-black
-          transition-all duration-200
-          hover:border-black/60 hover:bg-black hover:text-white
-          active:scale-[0.99]
-        "
-      >
-        Apply
-        <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
-      </button>
+        <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-white leading-tight">
+          {job.title}
+        </h3>
+
+        <p className="mt-2 text-xs sm:text-sm md:text-base text-white/60">
+          {job.location}
+        </p>
+
+        {/* button */}
+        <button
+          onClick={onApply}
+          className="
+            mt-6
+            w-full sm:w-auto
+            inline-flex items-center justify-center gap-3
+            rounded-xl border
+            px-7 sm:px-10
+            py-3 sm:py-3.5
+            text-sm sm:text-base font-semibold
+            transition-all duration-200
+            active:scale-[0.99]
+          "
+          style={{
+            borderColor: `${BRAND.cyan}55`,
+            color: BRAND.cyan,
+            background:
+              "linear-gradient(90deg, rgba(110,241,247,0.10), rgba(0,115,153,0.06))",
+          }}
+        >
+          Apply
+          <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+        </button>
+      </div>
     </motion.div>
   );
 }
 
 function ModalShell({ open, onClose, title, children }) {
-  // ✅ lock body scroll
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -109,7 +149,6 @@ function ModalShell({ open, onClose, title, children }) {
             exit={{ opacity: 0 }}
             onClick={onClose}
           >
-            {/* ✅ Panel: full height on small screens, centered on desktop */}
             <motion.div
               onClick={(e) => e.stopPropagation()}
               initial={{ y: 22, scale: 0.98, opacity: 0 }}
@@ -117,8 +156,7 @@ function ModalShell({ open, onClose, title, children }) {
               exit={{ y: 22, scale: 0.98, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="
-                w-full
-                max-w-[980px]
+                w-full max-w-[980px]
                 rounded-2xl sm:rounded-3xl
                 border border-white/10 bg-black
                 shadow-2xl overflow-hidden
@@ -154,9 +192,7 @@ function ModalShell({ open, onClose, title, children }) {
               </div>
 
               {/* Content */}
-              <div className="p-4 sm:p-6 overflow-auto">
-                {children}
-              </div>
+              <div className="p-4 sm:p-6 overflow-auto">{children}</div>
             </motion.div>
           </motion.div>
         </>
@@ -188,18 +224,17 @@ export default function CareersOpenings() {
   return (
     <section id="openings" className="bg-black py-10 sm:py-12 md:py-16">
       <div className="mx-auto w-[min(1100px,92vw)] px-4 sm:px-0">
-        <div className="mb-6 sm:mb-8 md:mb-10">
+        {/* ✅ CENTERED HEADING */}
+        <div className="mb-8 md:mb-12 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-tight">
             Open Positions
           </h2>
-          <p className="mt-2 sm:mt-3 text-sm sm:text-base text-white/60 max-w-2xl">
+          <p className="mt-2 sm:mt-3 text-sm sm:text-base text-white/60 max-w-2xl mx-auto">
             Explore our current openings and apply in a minute.
           </p>
         </div>
 
-        {/* ✅ responsive grid:
-            1 col mobile, 2 cols sm+, 3 cols lg+
-        */}
+        {/* ✅ grid stays responsive */}
         <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {JOBS.map((job) => (
             <JobCard key={job.id} job={job} onApply={() => handleApply(job)} />
@@ -221,7 +256,6 @@ export default function CareersOpenings() {
             </div>
           )}
 
-          {/* ✅ important: modal variant removes double padding */}
           <CareersForm variant="modal" />
         </ModalShell>
       </div>

@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * FlatSquaresWalls.jsx — Floor + Left/Right Walls
- * - Adds solid left/right walls so squares remain on-screen
- * - Safe separation clamps against walls/floor
- * - NOW supports multi-color palettes:
- *   color can be string OR array of strings
+ * FlatSquaresWalls.jsx — (NOW: Circles + Brand Palette)
+ * - Same physics
+ * - Draws gradient circles instead of squares
+ * - Uses your palette: #6EF1F7, #1353CD, #007399
  */
 
 export default function FlatSquaresWalls({
@@ -15,7 +14,6 @@ export default function FlatSquaresWalls({
   padding = 2.0,
 
   bg = "#0b0b0c",
-  color = "#ffffff", // ✅ string OR ["#007198", ...]
   stroke = false,
 
   gravity = 0.28,
@@ -39,6 +37,9 @@ export default function FlatSquaresWalls({
   enableClickShatter = true,
   shatterPower = 0.9,
   maxDt = 24,
+
+  // ✅ NEW: brand palette
+  palette = ["#6EF1F7", "#1353CD", "#007399"],
 }) {
   const canvasRef = useRef(null);
   const [mounted, setMounted] = useState(false);
@@ -49,17 +50,19 @@ export default function FlatSquaresWalls({
   const timeRef = useRef({ last: 0 });
 
   const rand = (a, b) => Math.random() * (b - a) + a;
+  const pick = (arr) => arr[(Math.random() * arr.length) | 0];
 
-  // ✅ normalize `color` prop → always a palette array
-  const getPalette = () => {
-    if (Array.isArray(color) && color.length) return color;
-    return [color || "#ffffff"];
-  };
-
-  // ✅ deterministic color pick by index (stable distribution)
-  const pickColor = (i) => {
-    const palette = getPalette();
-    return palette[i % palette.length];
+  // tiny hex lighten/darken helper (for circle gradient)
+  const shadeHex = (hex, amt) => {
+    const h = hex.replace("#", "").trim();
+    const num = parseInt(h.length === 3 ? h.split("").map((c) => c + c).join("") : h, 16);
+    let r = (num >> 16) & 255;
+    let g = (num >> 8) & 255;
+    let b = num & 255;
+    r = Math.max(0, Math.min(255, r + amt));
+    g = Math.max(0, Math.min(255, g + amt));
+    b = Math.max(0, Math.min(255, b + amt));
+    return `rgb(${r},${g},${b})`;
   };
 
   const init = () => {
@@ -77,20 +80,22 @@ export default function FlatSquaresWalls({
 
     const arr = [];
     for (let i = 0; i < count; i++) {
-      const s = Math.round(rand(size[0], size[1]));
+      const s = Math.round(rand(size[0], size[1])); // diameter basis
       const half = s * 0.5;
       const x = rand(half + padding, W - half - padding);
       const y = rand(half + padding, H - half - padding);
 
+      const base = pick(palette);
       arr.push({
         x,
         y,
         s,
+        r: s * 0.5,         // ✅ radius
         vx: 0,
         vy: 0,
         sleep: false,
         sleepTick: 0,
-        c: pickColor(i), // ✅ each square keeps its own color
+        baseColor: base,    // ✅ per particle color
       });
     }
 
@@ -99,6 +104,7 @@ export default function FlatSquaresWalls({
     partsRef.current = arr;
   };
 
+  // Separation uses circle distance (already what you do) – perfect for circles ✅
   function separate(arr, options = {}) {
     const { allowSleepResolve = false } = options;
     const maxS = size[1];
@@ -130,6 +136,7 @@ export default function FlatSquaresWalls({
         for (let gy = iy - 1; gy <= iy + 1; gy++) {
           const bkt = grid.get(key(gx, gy));
           if (!bkt) continue;
+
           for (const j of bkt) {
             if (j <= i) continue;
             const q = arr[j];
@@ -142,7 +149,6 @@ export default function FlatSquaresWalls({
             if (d2 > 0 && d2 < minDist * minDist) {
               const d = Math.sqrt(d2) || 1;
               const pen = minDist - d;
-
               if (!(allowSleepResolve || pen > sleepSeparationEpsilon) && p.sleep && q.sleep) continue;
 
               const ux = dx / d,
@@ -195,9 +201,11 @@ export default function FlatSquaresWalls({
       const { y: by, h: bh } = binRef.current;
       const { L, R, F } = boundsRef.current;
 
+      // background
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, W, H);
 
+      // walls + floor
       ctx.strokeStyle = "rgba(255,255,255,0.08)";
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -216,7 +224,7 @@ export default function FlatSquaresWalls({
         if (m.x != null) {
           const dx = p.x - m.x,
             dy = p.y - m.y;
-          if (dx * dx + dy * dy < repelRadius * repelRadius * 1.05) {
+          if (dx * dx + dy * dy < (repelRadius * repelRadius) * 1.05) {
             p.sleep = false;
             p.sleepTick = 0;
           }
@@ -285,25 +293,37 @@ export default function FlatSquaresWalls({
 
       const activeRatio = arr.reduce((n, p) => n + (p.sleep ? 0 : 1), 0) / arr.length;
       const passes =
-        activeRatio > 0.08
-          ? separationIterations
-          : Math.max(1, Math.floor(separationIterations / 2));
+        activeRatio > 0.08 ? separationIterations : Math.max(1, Math.floor(separationIterations / 2));
       for (let k = 0; k < passes; k++) separate(arr, { allowSleepResolve: true });
 
-      // ✅ draw per-square color
-      if (stroke) {
-        for (const p of arr) {
-          ctx.strokeStyle = p.c;
-          const x = Math.round(p.x - p.s * 0.5);
-          const y = Math.round(p.y - p.s * 0.5);
-          ctx.strokeRect(x, y, p.s, p.s);
-        }
-      } else {
-        for (const p of arr) {
-          ctx.fillStyle = p.c;
-          const x = Math.round(p.x - p.s * 0.5);
-          const y = Math.round(p.y - p.s * 0.5);
-          ctx.fillRect(x, y, p.s, p.s);
+      // ✅ DRAW: gradient circles
+      for (const p of arr) {
+        const r = p.r;
+
+        if (stroke) {
+          ctx.strokeStyle = p.baseColor;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.stroke();
+        } else {
+          // soft radial gradient per circle
+          const g = ctx.createRadialGradient(
+            p.x - r * 0.35,
+            p.y - r * 0.35,
+            r * 0.2,
+            p.x,
+            p.y,
+            r
+          );
+
+          g.addColorStop(0, shadeHex(p.baseColor, 55));  // highlight
+          g.addColorStop(0.55, p.baseColor);             // base
+          g.addColorStop(1, shadeHex(p.baseColor, -40)); // shadow
+
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.fill();
         }
       }
 
@@ -315,7 +335,6 @@ export default function FlatSquaresWalls({
   }, [
     mounted,
     bg,
-    color, // ✅ palette changes now trigger redraw/init via resize effect below
     gravity,
     airDrag,
     restitution,
@@ -332,6 +351,8 @@ export default function FlatSquaresWalls({
     preRelaxIterations,
     sleepSeparationEpsilon,
     maxDt,
+    palette,
+    stroke,
   ]);
 
   useEffect(() => {
@@ -386,13 +407,14 @@ export default function FlatSquaresWalls({
       const my = e.clientY - rect.top;
       const m = mouseRef.current;
       const arr = partsRef.current;
+
       for (const p of arr) {
         const dx = p.x - mx,
           dy = p.y - my;
         const d = Math.hypot(dx, dy) || 1;
         const nx = dx / d,
           ny = dy / d - upwardBias;
-        const impulse = shatterPower * (1 / (0.4 + d * 0.01)) * (1 + m.speed * speedBoost);
+        const impulse = (shatterPower * (1 / (0.4 + d * 0.01))) * (1 + m.speed * speedBoost);
         p.vx += nx * impulse;
         p.vy += ny * impulse;
         p.sleep = false;
@@ -412,8 +434,7 @@ export default function FlatSquaresWalls({
       window.removeEventListener("mouseleave", onLeave);
       canvas.removeEventListener("click", onClick);
     };
-    // ✅ include `color` so changing palette respawns squares with new colors
-  }, [count, binHeightRatio, size, enableClickShatter, color]);
+  }, [count, binHeightRatio, size, enableClickShatter, palette]);
 
   return (
     <div className="w-full h-full relative">

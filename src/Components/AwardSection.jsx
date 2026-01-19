@@ -8,7 +8,13 @@ export default function AwardsSection({ imageSrc = "/image/award.png" }) {
     <section className="w-full bg-black">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
         <button
-          onClick={() => navigate("/awards")}
+         onClick={() => {
+    navigate("/awards");
+    // scroll to top after route change
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+  }}
           className="
             w-full overflow-hidden rounded-3xl
             bg-black

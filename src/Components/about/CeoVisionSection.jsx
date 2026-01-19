@@ -3,29 +3,34 @@ import React from "react";
 const teamMembers = [
   {
     name: "Riveen",
-    role: "CEO",
+    role: "Managing Director",
     image: "/image/manager1.jpeg", 
   },
   {
-    name: "Andrew Thomas",
-    role: "MD",
-    image: "/image/profile2.jpg",
+    name: "Nihal",
+    role: "Director",
+    image: "/image/manger2.jpeg",
   },
   {
-    name: "Jatin Mava",
+    name: "Sabil",
     role: "Director",
-    image: "/image/profile3.jpg",
+    image: "/image/manger3.jpg",
   },
   {
-    name: "Ravi Vyas",
+    name: "Haseer",
     role: "Director",
-    image: "/image/profile4.jpg",
+    image: "/image/manger3.jpg",
+  },
+   {
+    name: "Ijas",
+    role: "Director",
+    image: "/image/manger3.jpg",
   },
 ];
 
 const CeoVisionSection = () => {
   return (
-    <section className="w-full bg-[#0a0a0a] py-16 px-4">
+    <section className="w-full bg-[#0a0a0a] pt-6 pb-12 sm:py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Main heading */}
         <h2 className="text-center text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-10">
@@ -38,7 +43,7 @@ const CeoVisionSection = () => {
         </p> */}
 
         {/* Cards row like the reference image */}
-        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:gap-6 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]">
           {teamMembers.map((member) => (
             <div
               key={member.name}

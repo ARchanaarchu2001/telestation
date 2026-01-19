@@ -6,18 +6,23 @@ const BRAND = {
 
 const team = [
    { name: "ANITA", role: "Team Lead", image: "/image/tl4.jpeg" },
-    { name: "FAJINA", role: "Process Head", image: "/image/data-analyst.JPG" },
+    { name: "FAJINA", role: "Process Head", image: "/image/process-head.jpeg" },
+    { name: "SHAMNA", role: "HR Manager", image: "/image/hr.jpeg" },
+    { name: "AISHWAR", role: "Creative Lead", image: "/image/creative-lead.JPG" },
+    { name: "HARI", role: "Senior Data Analyst", image: "/image/data-analyst.JPG" },
 { name: "KAVYA", role: "Quality Assistant", image: "/image/quality1.jpeg" },
-{ name: "HARI", role: "Senior Data Analyst", image: "/image/data-analyst.JPG" },
+
+
 { name: "ADHIL", role: "Senior Accountant", image: "/image/accountant.JPG" },
  { name: "AKSHAY", role: "Unit Lead", image: "/image/unit-lead.jpeg" },
+  { name: "ASLAH", role: "Admin", image: "/image/asla.webp" },
   { name: "FUHAD ZENIN", role: "Team Lead", image: "/image/tl1.jpg" },
 
 
 
 
   { name: "ANANDHAN", role: "Team Lead", image: "/image/tl2.png" },
-  { name: "AISHWAR", role: "Creative Lead", image: "/image/creative-lead.JPG" },
+  
   { name: "VIMAL", role: "Team Lead", image: "/image/tl3.png" },
  
   { name: "ZAINAB", role: "Team Lead", image: "/image/tl5.jpeg" },
@@ -36,7 +41,7 @@ const team = [
 ];
 
 const TeamSection = () => {
-  const initialCount = 5; // ✅ how many cards to show first
+  const initialCount = 4; // ✅ how many cards to show first
   const [showAll, setShowAll] = useState(false);
 
   const visibleTeam = useMemo(() => {
@@ -70,7 +75,19 @@ const TeamSection = () => {
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div
+  className={`
+    grid gap-6
+    grid-cols-2
+    md:grid-cols-3
+    ${
+      !showAll && initialCount === 4
+        ? "lg:grid-cols-4"
+        : "lg:grid-cols-5"
+    }
+  `}
+>
+
           {visibleTeam.map((member, idx) => (
             <div
               key={`${member.name}-${idx}`}

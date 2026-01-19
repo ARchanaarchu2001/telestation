@@ -165,7 +165,7 @@ function StackingCard({ item, index, total, scrollYProgress }) {
             </div>
 
             {/* CTA */}
-            <div className="mt-10 flex flex-wrap items-center gap-3">
+            {/* <div className="mt-10 flex flex-wrap items-center gap-3">
               <button
                 className="
                   px-7 py-3.5 rounded-full text-black font-semibold
@@ -189,7 +189,7 @@ function StackingCard({ item, index, total, scrollYProgress }) {
               >
                 Learn more
               </button>
-            </div>
+            </div> */}
           </div>
 
           {/* RIGHT */}
